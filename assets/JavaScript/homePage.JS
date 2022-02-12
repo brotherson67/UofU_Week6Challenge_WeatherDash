@@ -2,26 +2,22 @@ const apiKey="cf086a894f4a176fb09f73e8ee662b24"
 var queryInputE1 = document.getElementById("chosenCity")
 var userFormE2 = document.getElementById("user-form");
 var searchedCitiesE1 = document.getElementById("searchedCities");
-const city = document.getElementById("chosenCity");
+let city = document.getElementById("chosenCity");
 const getCityBtn = document.getElementById("getCityBtn")
 
 
 // get city coordinates
-let coordinates = (cityName) => {
+const coordinates = (cityName => {
     const endpoint = `https://api.openweathermap.org/geo/1.0/direct?q=" + ${cityName} + "&limit=1&appid=${apiKey}`
     // fetch API data
     fetch(endpoint)
       // then turn returned data into json
-      .then(coordInfo =() => {
-          if (!coordInfo) {
-              console.log("there was an error in the first statement")
-              return
-          }
-          
-      })
+      .then((res => res.json()))
+      .then(data => console.log(data))
+      .catch((err) => console.log(err))
       // then split lat and long
       // catch with err if something goes wrong
-}
+});
 
 
 // console.log(city)
@@ -50,8 +46,11 @@ let coordinates = (cityName) => {
 
 userFormE2.addEventListener("submit", function(e) {
     e.preventDefault();
-    console.dir(city)
-    console.log(city.value)
+    // console.dir(city)
+    city = city.value
+    coordinates(city)
+    const test = coordinates(city)
+    // console.log(test)
 
 })
 
