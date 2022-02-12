@@ -5,4 +5,15 @@ nav {
     margin-bottom: 2%;
 }
 
+.searchedCities {
+    background-color: green;
+
+}
+
+.weatherForecast {
+    width: 65vw;
+    height: 20vh;
+    background-color: aqua;
+}
+
 
