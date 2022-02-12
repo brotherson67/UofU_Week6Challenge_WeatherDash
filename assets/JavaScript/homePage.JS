@@ -15,19 +15,19 @@ const coordinates = (cityName => {
           console.log(data)
           let lat = data[0].lat
           let lon = data[0].lon
-          return { lat, lon }
+          getWeather(lat, lon)
         })
       .catch((err) => console.log(err))      // catch with err if something goes wrong
 });
 
-const getWeather = function() {
+const getWeather = function(lat, lon) {
     //get value from input element
-    var cityChosen = queryInputE1.value;
-    var cityCall = "api.openweathermap.org/data/2.5/forecast?q=provo&appid="
-    console.log(cityCall)
-    fetch(cityCall).then(function(response) {
+    var cityCall = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`
+    fetch(cityCall)
+      .then(function(response) {
         console.log(response)
     })
+      .catch(err => console.log(err))
 };
 
 
