@@ -8,7 +8,7 @@ const getCityBtn = document.getElementById("getCityBtn")
 
 // get city coordinates
 const coordinates = (cityName => {
-    const endpoint = `https://api.openweathermap.org/geo/1.0/direct?q=" + ${cityName} + "&limit=1&appid=${apiKey}`
+    const endpoint = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
     fetch(endpoint)// fetch API data
       .then((res => res.json())) // then turn returned data into json
       .then(data => { // then split lat and long
@@ -22,11 +22,10 @@ const coordinates = (cityName => {
 
 const getWeather = function(lat, lon) {
     //get value from input element
-    var cityCall = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`
+    var cityCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`
     fetch(cityCall)
-      .then(function(response) {
-        console.log(response)
-    })
+      .then(response => response.json())
+      .then(data => console.log(data))
       .catch(err => console.log(err))
 };
 
