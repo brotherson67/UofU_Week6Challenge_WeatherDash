@@ -13,7 +13,12 @@ const coordinates = (cityName => {
     fetch(endpoint)
       // then turn returned data into json
       .then((res => res.json()))
-      .then(data => console.log(data))
+      .then(data => {
+          console.log(data)
+          let lat = data[0].lat
+          let lon = data[0].lon
+          console.log(lat, lon)
+        })
       .catch((err) => console.log(err))
       // then split lat and long
       // catch with err if something goes wrong
@@ -49,10 +54,4 @@ userFormE2.addEventListener("submit", function(e) {
     // console.dir(city)
     city = city.value
     coordinates(city)
-    const test = coordinates(city)
-    // console.log(test)
-
-})
-
-
-
+});
