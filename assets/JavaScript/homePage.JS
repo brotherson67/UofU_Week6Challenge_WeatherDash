@@ -1,12 +1,25 @@
+require('dotenv').config();
+const apiKey = process.env.apiKey
+
 var queryInputE1 = document.getElementById("chosenCity")
 var userFormE2 = document.getElementById("user-form");
 var searchedCitiesE1 = document.getElementById("searchedCities");
 
 
+// get city coordinates
+let coordinates = () => {
+    // fetch API data
+      // then turn returned data into json
+      // then split lat and long
+      // catch with err if something goes wrong
+}
+
+
+console.log(searchedCitiesE1)
 var getWeather = function() {
     //get value from input element
     var cityChosen = queryInputE1.value;
-    var cityCall = "api.openweathermap.org/data/2.5/forecast?q=provo&appid=cf086a894f4a176fb09f73e8ee662b24"
+    var cityCall = "api.openweathermap.org/data/2.5/forecast?q=provo&appid="
     console.log(cityCall)
     fetch(cityCall).then(function(response) {
         console.log(response)
