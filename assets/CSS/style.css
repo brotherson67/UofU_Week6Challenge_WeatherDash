@@ -1,19 +1,19 @@
 nav {
-    background-color: blue;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2%;
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2%;
 }
 
-.searchedCities {
-    background-color: green;
-
+#weather-forecast {
+  width: 65vw;
+  height: 20vh;
+  background-color: aqua;
 }
 
-.weatherForecast {
-    width: 65vw;
-    height: 20vh;
-    background-color: aqua;
+.card-body {
+  background-color: rgb(194, 191, 191);
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 7px;
 }
-
-

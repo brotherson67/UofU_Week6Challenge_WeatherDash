@@ -6,7 +6,7 @@ let city = document.getElementById("chosenCity");
 const getCityBtn = document.getElementById("getCityBtn");
 
 const kelvin2Fer = (tempKelvin) => {
-  const tempFer = (tempKelvin - 273.15) * (9 / 5) + 32;
+  const tempFer = Math.round((tempKelvin - 273.15) * (9 / 5) + 32);
   return tempFer;
 };
 
@@ -16,27 +16,51 @@ const uvSeverity = (currentIndex) => {
   if (currentIndex >= 5) return "High";
 };
 
+// add current weather
+const showCurrWeather = (currTemp, windSpeed, currHumid, currUV) => {
+  let temp = document.querySelector("#currtemp");
+  temp.innerHTML = `Temp: ${currTemp} (F)`;
+  let wind = document.querySelector("#currwind");
+  wind.innerHTML = `Wind: ${windSpeed}`;
+  let humidity = document.querySelector("#currhumidity");
+  humidity.innerHTML = `Humidity: ${currHumid}%`;
+  let UVI = document.querySelector("#curruvi");
+  UVI.innerHTML = `UV Index: ${currUV}`;
+};
+
+const showForeWeather = (date, futureTemp, futureWind, futureHumidity) => {
+  for (let i = 0; i < 4; i++) {
+    let title = document.querySelector("title" + i);
+    title.innerHTML = "DATE";
+    let temp = document.querySelector("#temp" + i);
+    temp.innerHTML = `Temp: ${futureTemp} (F)`;
+    let wind = document.querySelector("#wind" + i);
+    wind.innerHTML = `Wind: ${futureWind}`;
+    let humidity = document.querySelector("#humidity" + i);
+    humidity.innerHTML = `Humidity: ${futureHumidity}%`;
+  }
+};
+
 const getWeather = function (lat, lon) {
   //get value from input element
   var cityCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`;
   fetch(cityCall)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      // console.log(data);
       const temp = kelvin2Fer(data.current.temp);
-      console.log(`the temp in F is ${temp}`);
-      const humidity = data.current.humidity;
-      console.log(`the humidiy is ${humidity}%`);
       const windSpeed = data.current.wind_speed;
-      console.log(`The current windspeed is ${windSpeed}`);
+      const humidity = data.current.humidity;
       const UVIndex = data.current.uvi;
-      console.log(
-        `the current UV index is ${UVIndex} and the severity is ${uvSeverity(
-          UVIndex
-        )}`
-      );
-
-      return data;
+      showCurrWeather(temp, windSpeed, humidity, UVIndex);
+      for (let i = 0; i > 5; i++) {
+        let date = data.daily[i].dt;
+        let futureTemp = kelvin2Fer(data.daily[i].temp.day);
+        let futureWind = data.daily[i].wind_speed;
+        let futureHumidity = data.daily[i].humidity;
+        showForeWeather(date, futureTemp, futureWind, futureHumidity);
+      }
+      console.dir(data);
     })
     .catch((err) => console.log(err));
 };
@@ -51,12 +75,10 @@ const coordinates = (cityName) => {
       let lat = data[0].lat;
       let lon = data[0].lon;
       console.log("happening here");
-      getWeather(lat, lon);
+      const weather = getWeather(lat, lon);
     })
     .catch((err) => console.log(err)); // catch with err if something goes wrong
 };
-
-// get information from objects
 
 userFormE2.addEventListener("submit", function (e) {
   e.preventDefault();
