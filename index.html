@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
 
-    <title>Document</title>
+    <title>My Weather</title>
   </head>
   <body>
     <nav>
@@ -38,6 +38,19 @@
         <div id="searchedCities"></div>
       </div>
       <div class="col-9 border">
+        <div id="current-weather" class="p-3 mb-2">
+          <h2 id="current-heading">Current Weather</h2>
+          <div class="row">
+            <div class="data-container col-4" id="current-data">
+              <div id="currtemp">Temp:</div>
+              <div id="currwind">Wind:</div>
+              <div id="currhumid">Humidity:</div>
+              <div id="curruvi">UV Index:</div>
+            </div>
+            <div class="col-4" id="spacer"></div>
+            <div id="current-icon" class="col-4"></div>
+          </div>
+        </div>
         <div id="weatherForecast">
           <div class="row justify-content-around d-block d-xl-flex mr-0">
             <div id="card0" class="text-center col m-2 p-0">

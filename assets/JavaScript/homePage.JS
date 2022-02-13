@@ -10,6 +10,12 @@ const kelvin2Fer = (tempKelvin) => {
   return tempFer;
 };
 
+const uvSeverity = (currentIndex) => {
+  if (currentIndex < 3) return "Low";
+  if (currentIndex >= 3 && currentIndex < 5) return "Moderate";
+  if (currentIndex >= 5) return "High";
+};
+
 const getWeather = function (lat, lon) {
   //get value from input element
   var cityCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`;
@@ -24,7 +30,11 @@ const getWeather = function (lat, lon) {
       const windSpeed = data.current.wind_speed;
       console.log(`The current windspeed is ${windSpeed}`);
       const UVIndex = data.current.uvi;
-      console.log(`the current UV index is ${UVIndex}`);
+      console.log(
+        `the current UV index is ${UVIndex} and the severity is ${uvSeverity(
+          UVIndex
+        )}`
+      );
 
       return data;
     })
